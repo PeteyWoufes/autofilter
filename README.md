@@ -11,9 +11,9 @@ To use this program you will need to provide a few things:
 * Groups to create and users to add to those groups.
 
 To work with the source code provided you will also need to install some modules. You can do this by entering the following command into your Python interpreter:
-'''Python
+```Python
 pip install -r requirements.txt
-'''
+```
 
 ## License
 This program is licenced under the MIT License. In short, all I require is that you preserve the copyright and license notices in this code. You can do whatever you want with it and you are not obligated to publish your improvements upstream, however, it would be greatly appreciated!
