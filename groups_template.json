@@ -1,0 +1,8 @@
+{
+    "users": [
+        "testaccount@yourdomain.com"
+    ],
+    "groups": [
+        "testgroup@yourdomain.com"
+    ]   
+}

@@ -1,0 +1,8 @@
+
+.vscode/settings.json
+__pycache__/create_filter.cpython-37.pyc
+*.pyc
+auth.json
+config.json
+groups.json
+*.p12
