@@ -6,3 +6,5 @@ auth.json
 config.json
 groups.json
 *.p12
+test.py
+test.py
