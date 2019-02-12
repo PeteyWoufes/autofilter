@@ -47,3 +47,24 @@ def CreateLabel(service, user_id, label_object):
         ''' Error message when unable to create label. '''
         print('Unable to create label.')
 
+def addLabels(google_api, show):
+    data = getData()
+    for user in data[show]["users"]:
+        service = getAuth(google_api, user)
+        for label in data[show]["labels"]:
+            label_str = str(label)
+            label_object = MakeLabel(label_str, mlv="show", llv="labelShow")
+            CreateLabel(service, user, label_object)
+            return label
+
+def getAuth(google_api, user):
+    credentials = google_api.getCreds()
+    delegated_creds = credentials.create_delegated(user)
+    service = build(
+                'gmail', 'v1', http=delegated_creds.authorize(Http()))
+    return service
+
+def getData():
+    with open("config.json", 'r') as a:
+        data = json.loads(a.read())
+    return data
