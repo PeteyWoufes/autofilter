@@ -8,9 +8,13 @@ import time
 
 def main():
     args = getArgs()
-    labels.addLabels(google, args.show)
-    filters.create_filter(google, args.show)
-    print("All done. This script will close in 10 seconds. Thank you for playing Wing Commander!")
+    try:
+        labels.addLabels(google, args.show)
+        filters.create_filter(google, args.show)
+        print("All done. This script will close in 10 seconds. Thank you for playing Wing Commander!")
+    except KeyError:
+        print("Correct usage: department_filters.py -s --show.")
+        print("This script will close in 10 seconds. Thank you for playing Wing Commander!")
     time.sleep(10)
     return 0
 

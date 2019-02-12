@@ -1,5 +1,5 @@
 {
-    "department": {
+    "show1": {
         "labels": [
             "test_label"
         ],
@@ -14,7 +14,7 @@
                 },
                 "action": {
                     "addLabelIds": [
-                        "INBOX"
+                        "STARRED"
                     ],
                     "removeLabelIds": [
                         "INBOX"
@@ -28,7 +28,7 @@
                 },
                 "action": {
                     "addLabelIds":  [
-                        "INBOX"
+                        "STARRED"
                     ],
                     "removeLabelIds": [
                         "INBOX"
