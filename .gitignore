@@ -8,3 +8,4 @@ groups.json
 *.p12
 test.py
 test.py
+.vscode/launch.json

@@ -1,12 +1,13 @@
-import autofilter.google_api
-import autofilter.create_label
-import autofilter.create_filter
-import autofilter.group_manager
+import autofilter.google_api as google
+import autofilter.create_label as labels
+import autofilter.create_filter as filters
+import autofilter.group_manager as groups
 import argparse
 
 
 def main():
     args = getArgs()
+    filters.create_filter(google, args.show)
 
 
 def getArgs():

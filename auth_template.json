@@ -14,5 +14,8 @@
         "https://www.googleapis.com/auth/gmail.labels",
         "https://www.googleapis.com/auth/gmail.settings.basic"
         
+    ],
+    "poweruser": [
+        "testaccount@yourdomain.com"
     ]
 }
