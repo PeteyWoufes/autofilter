@@ -57,7 +57,7 @@ def listUsers(google_api):
     delegated_creds = getAuth(google_api)
     # credentials = google_api.getCreds()
     service = build("admin", "directory_v1", http=delegated_creds.authorize(Http()))
-    results = service.groups().list(userKey="jamal.mahmoud@giant.ie", domain="giant.ie").execute()
+    results = service.groups().list(userKey="exampleUser@yourdomain.com", domain="yourdomain.com").execute()
     response = json.dumps(results, indent=4, separators=(",",";"))
     print(response)
     
