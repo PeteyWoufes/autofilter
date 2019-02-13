@@ -14,7 +14,6 @@ def loadGroups():
         data = json.loads(a.read())
     return data
 
-
 def addUser(google_api, show):
     data = loadGroups()
     delegated_creds = getAuth(google_api)
@@ -50,6 +49,15 @@ def getAuth(google_api):
     credentials = google_api.getCreds()
     with open("auth.json", 'r') as a:
         data = json.loads(a.read())
-    poweruser = data["poweruser"]
+    poweruser = data["poweruser"][0]
     delegated_creds = credentials.create_delegated(poweruser)
     return delegated_creds
+
+def listUsers(google_api):
+    delegated_creds = getAuth(google_api)
+    # credentials = google_api.getCreds()
+    service = build("admin", "directory_v1", http=delegated_creds.authorize(Http()))
+    results = service.groups().list(userKey="jamal.mahmoud@giant.ie", domain="giant.ie").execute()
+    response = json.dumps(results, indent=4, separators=(",",";"))
+    print(response)
+    

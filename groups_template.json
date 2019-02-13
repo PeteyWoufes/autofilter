@@ -1,8 +1,10 @@
 {
-    "users": [
-        "testaccount@yourdomain.com"
-    ],
-    "groups": [
-        "testgroup@yourdomain.com"
-    ]   
+    "show": {
+        "users": [
+            "testaccount@yourdomain.com"
+        ],
+        "groups": [
+            "testgroup@yourdomain.com"
+        ]
+    }
 }
