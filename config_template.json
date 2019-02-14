@@ -1,39 +1,37 @@
 {
-    "show1": {
-        "labels": [
-            "test_label"
-        ],
-        "users": [
-            "test.account@yourdomain.com"
-        ],
-        "filters": {
-            "filter_01": {
-                "criteria": {
-                    "from": "test@testemail.com",
-                    "to": "test@testemail.com"
-                },
-                "action": {
-                    "addLabelIds": [
-                        "STARRED"
-                    ],
-                    "removeLabelIds": [
-                        "INBOX"
-                    ]
-                }
+    "labels": [
+        "test_label"
+    ],
+    "users": [
+        "test.account@yourdomain.com"
+    ],
+    "filters": {
+        "filter_01": {
+            "criteria": {
+                "from": "test@testemail.com",
+                "to": "test@testemail.com"
             },
-            "filter_02": {
-                "criteria": {
-                    "from": "email@testemail.com",
-                    "to": "email@testemail.com"
-                },
-                "action": {
-                    "addLabelIds":  [
-                        "STARRED"
-                    ],
-                    "removeLabelIds": [
-                        "INBOX"
-                    ]
-                }
+            "action": {
+                "addLabelIds": [
+                    "STARRED"
+                ],
+                "removeLabelIds": [
+                    "INBOX"
+                ]
+            }
+        },
+        "filter_02": {
+            "criteria": {
+                "from": "email@testemail.com",
+                "to": "email@testemail.com"
+            },
+            "action": {
+                "addLabelIds": [
+                    "STARRED"
+                ],
+                "removeLabelIds": [
+                    "INBOX"
+                ]
             }
         }
     }
