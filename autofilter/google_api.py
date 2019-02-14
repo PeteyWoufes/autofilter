@@ -1,3 +1,5 @@
+import json
+
 from apiclient import errors
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -5,7 +7,6 @@ from httplib2 import Http
 from oauth2client import client, file, service_account, tools
 from oauth2client.service_account import ServiceAccountCredentials
 
-import json
 
 def getCreds():
     ''' Reads from a .json file '''

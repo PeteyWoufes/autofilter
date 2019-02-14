@@ -1,18 +1,21 @@
 # pylint:disable=E1101
 from __future__ import print_function
-from googleapiclient.discovery import build
-import google.oauth2
-from oauth2client.service_account import ServiceAccountCredentials
+
 import json
+
+import google.oauth2
 import googleapiclient
-from httplib2 import Http
 import requests
+from googleapiclient.discovery import build
+from httplib2 import Http
+from oauth2client.service_account import ServiceAccountCredentials
 
 
 def loadGroups():
     with open("groups.json", 'r') as a:
         data = json.loads(a.read())
     return data
+
 
 def addUser(google_api, show):
     data = loadGroups()
@@ -44,7 +47,6 @@ def addGroup(group, google_api):
     print("The group " + group + " now exists.")
 
 
-
 def getAuth(google_api):
     credentials = google_api.getCreds()
     with open("auth.json", 'r') as a:
@@ -53,11 +55,14 @@ def getAuth(google_api):
     delegated_creds = credentials.create_delegated(poweruser)
     return delegated_creds
 
-def listUsers(google_api):
+
+def listUsers(google_api, show):
+    data = loadGroups()
     delegated_creds = getAuth(google_api)
-    # credentials = google_api.getCreds()
-    service = build("admin", "directory_v1", http=delegated_creds.authorize(Http()))
-    results = service.groups().list(userKey="exampleUser@yourdomain.com", domain="yourdomain.com").execute()
-    response = json.dumps(results, indent=4, separators=(",",";"))
-    print(response)
-    
+    for user in data[show]["users"]:
+        service = build("admin", "directory_v1",
+                        http=delegated_creds.authorize(Http()))
+        results = service.groups().list(
+            userKey=user, domain=data[show]["domain"][0]).execute()
+        response = json.dumps(results, indent=4, separators=(",", ";"))
+        print(response)

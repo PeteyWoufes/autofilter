@@ -5,6 +5,9 @@
         ],
         "groups": [
             "testgroup@yourdomain.com"
+        ],
+        "domain": [
+            "giant.ie"
         ]
     }
 }

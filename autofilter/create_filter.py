@@ -8,6 +8,7 @@ from httplib2 import Http
 import requests
 
 
+"""
 def main(google_api):
     ''' Gets service account credentials '''
     credentials = google_api.getCreds()
@@ -26,27 +27,33 @@ def main(google_api):
                 filter_data = json.loads(json.dumps(data[department]['filters'][google_filter]))
                 body = {"criteria": filter_data['criteria'], "action": filter_data['action']}
                 # create_filter(service, body)
+"""
 
-
-def create_filter(google_api, show):
+def create_filter(google_api, data):
     
-    data = getData()
-    for user in data[show]["users"]:
+    config = getConfig()
+    for user in config["users"]:
         service = getAuth(google_api, user)
-        for google_filter in data[show]['filters']:
-                filter_data = json.loads(json.dumps(data[show]['filters'][google_filter]))
+        for google_filter in config['filters']:
+                filter_data = config['filters'][google_filter]
                 body = {"criteria": filter_data['criteria'], "action": filter_data['action']}
+                
                 ''' Tries to create filter using parameters set earlier. '''
                 service.users().settings().filters().\
                     create(userId="me", body=body).execute()
                 ''' Confirmation Message '''
                 print("Filter " + str(google_filter) + " successfully created.")
-                
+            
 
-def getData():
+def getConfig():
     with open("config.json", 'r') as a:
-        data = json.loads(a.read())
-    return data
+        config = json.loads(a.read())
+    return config
+
+def getIDs():
+    with open("id.txt", "r") as file:
+        ids_file = json.loads(file.read())
+    return ids_file
 
 def getAuth(google_api, user):
     credentials = google_api.getCreds()
