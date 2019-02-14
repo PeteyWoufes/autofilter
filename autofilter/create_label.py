@@ -1,5 +1,6 @@
 from googleapiclient.discovery import build
 from httplib2 import Http
+import autofilter.google_api as google_api
 
 
 def batch_add(google_api, data):
@@ -9,15 +10,16 @@ def batch_add(google_api, data):
         service = google_api.buildService(user)
         for label in data["labels"]:
             label_str = str(label)
-            label_object = {'messageListVisibility': "show",
-                            'name': label_str, 'labelListVisibility': "labelShow"}
+            label_object = __create_label_object(label_str)
             ''' Calls function to add the label to the users' account. '''
             __add(service, user, label_object)
 
-''' public entry for single label create'''
-def add(google_api, user, label_object):
+''' Public Access Point for creation of single label. '''
+def add(user, label_str):
+    label_object = __create_label_object(label_str)
     service = google_api.buildService(user)
-    __add(service, user, label_object)
+    label = __add(service, user, label_object)
+    return label
 
 
 def __add(service, user, label_object):
@@ -32,4 +34,8 @@ def __add(service, user, label_object):
     except:
         print('Unable to create label.')
 
-
+def __create_label_object(label_str):
+    ''' Creates a label object in a format usable by Gmail. '''
+    label_object = {'messageListVisibility': "show",
+                            'name': label_str, 'labelListVisibility': "labelShow"}
+    return label_object
