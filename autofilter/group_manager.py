@@ -18,12 +18,12 @@ def loadGroups():
     return data
 
 
-def addUser(show):
+def addUser():
     data = loadGroups()
 
     ''' Sets the user to add to the group (bodyInfo) and the group to add them to (groupInfo) '''
-    for group in data[show]["groups"]:
-        for user in data[show]["users"]:
+    for group in data["groups"]:
+        for user in data["users"]:
             service = google_api.buildService(None, "directory")
             bodyInfo = {"email": user}
             ''' Tries to add user to the group '''
@@ -46,9 +46,9 @@ def createGroup(group):
 
 def listUsers(show):
     data = loadGroups()
-    for user in data[show]["users"]:
+    for user in data["users"]:
         service = google_api.buildService(None, "directory")
         results = service.groups().list(
-            userKey=user, domain=data[show]["domain"][0]).execute()
+            userKey=user, domain=data["domain"][0]).execute()
         response = json.dumps(results, indent=4, separators=(",", ";"))
         print(response)

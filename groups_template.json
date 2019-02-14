@@ -1,13 +1,11 @@
 {
-    "show": {
-        "users": [
-            "testaccount@yourdomain.com"
-        ],
-        "groups": [
-            "testgroup@yourdomain.com"
-        ],
-        "domain": [
-            "giant.ie"
-        ]
-    }
+    "users": [
+        "testaccount@yourdomain.com"
+    ],
+    "groups": [
+        "testgroup@yourdomain.com"
+    ],
+    "domain": [
+        "giant.ie"
+    ]
 }
