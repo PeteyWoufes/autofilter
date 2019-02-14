@@ -16,6 +16,7 @@ def batch_add(google_api, data):
 
 ''' Public Access Point for creation of single label. '''
 def add(user, label_str):
+    ''' Builds label object to add to user's Gmail account. '''
     label_object = __create_label_object(label_str)
     service = google_api.buildService(user, "gmail")
     label = __add(service, user, label_object)

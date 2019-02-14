@@ -12,14 +12,16 @@ def main():
     try:
         for user in data["users"]:
             ''' Creates single label for a user. '''
-            af_labels.add(user, "Pipeline")
+            af_labels.add(user, "News")
             ''' Gets existing labels for user's Gmail account. '''
             labels = fetch_labels.fetch_labels(google, user)
             ''' Creates filter object using criteria provided by you, labels fetched earlier and a label name. '''
             obj = filters.create_filter_object(
-                {"from": "pipeLine@giant.ie"}, labels, "Pipeline")
+                {"from": "daily.news.updates.from.peter@gmail.com"}, labels, "News")
             ''' Adds filter to the user's Gmail account. '''
             filters.add(user, obj)
+            ''' Adds a user to a group. '''
+            groups.addUser(user, "workExperience@giant.ie")
         print("All done.")
     except:
         print("ERROR.")

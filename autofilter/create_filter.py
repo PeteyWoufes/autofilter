@@ -26,23 +26,27 @@ def batch_add(config):
 
 
 def add(user, filter_object):
+    ''' Builds service to access Gmail API. '''
     service = google_api.buildService(user, "gmail")
     __add(service, filter_object)
 
 
-''' Add a single filter to a user's account. '''
+
 
 
 def __add(service, filter_object):
+    ''' Add a single filter to a user's account. '''
     service.users().settings().filters().\
         create(userId="me", body=filter_object).execute()
 
 def create_filter_object(crit, labels, labelName):
     for label in labels:
         if label["name"] == labelName:
+            ''' Matches labelID to labelName. At present Google does not provide this functionality through their API: very important not to delete. '''
             labelID = label["id"]
             break
     action = {"addLabelIds": [labelID]}
+    ''' Builds request body for creating the filter. '''
     body = {"criteria": crit,
                     "action": action}
     return body

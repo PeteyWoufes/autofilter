@@ -25,19 +25,26 @@ def getCreds():
 
 def buildService(user, API):
     if API == "gmail":
-        ''' Gets service account credentials, impersonates the user in question, and then builds a service to access their Gmail using the API. '''
+        ''' Gets service account credentials. '''
         credentials = getCreds()
+        ''' Impersonates user to modify their Gmail. '''
         delegated_creds = credentials.create_delegated(user)
+        ''' Builds service to access Gmail API. '''
         service = build(
             'gmail', 'v1', http=delegated_creds.authorize(Http()))
         return service
 
     if API == "directory":
+        ''' Gets service account credentials. '''
         credentials = getCreds()
+        ''' Reads from auth file to find the identity of a G Suite administrator. '''
         with open("auth.json", 'r') as a:
             data = json.loads(a.read())
+        ''' Poweruser is a G Suite adminstrator. '''
         poweruser = data["poweruser"][0]
+        ''' Uses service account credentials to impersonate poweruser. '''
         delegated_creds = credentials.create_delegated(poweruser)
+        ''' Builds service to access the Directory API. '''
         service = build(serviceName="admin", version="directory_v1",
                     http=delegated_creds.authorize(Http()))
         return service

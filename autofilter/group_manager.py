@@ -18,26 +18,32 @@ def loadGroups():
     return data
 
 
-def addUser():
+def bulkAddUser():
     data = loadGroups()
-
     ''' Sets the user to add to the group (bodyInfo) and the group to add them to (groupInfo) '''
     for group in data["groups"]:
         for user in data["users"]:
             service = google_api.buildService(None, "directory")
             bodyInfo = {"email": user}
-            ''' Tries to add user to the group '''
+            ''' Tries to add user to the group. '''
             service.members().insert(body=bodyInfo, groupKey=group).execute()
             ''' Confirmation Message '''
             print(user + " is now a member of " + group)
 
-
+def addUser(user, group):
+    service = google_api.buildService(None, "directory")
+    bodyInfo = {"email": user}
+    ''' Tries to add user to the group. '''
+    try:
+        service.members().insert(body=bodyInfo, groupKey=group)
+        print(user + " is now a member of " + group)
+    except:
+        print("Unable to add " + user + " to " + group)
 def createGroup(group):
     ''' Impersonates the administrator (poweruser) and builds a service to access the Directory API '''
     service = google_api.buildService(None, "directory")
     ''' Sets the groupKey of the group '''
     groupInfo = {"email": group}
-
     ''' Tries to create group '''
     service.groups().insert(body=groupInfo).execute()
     ''' Confirmation Message '''
@@ -45,10 +51,14 @@ def createGroup(group):
 
 
 def listUsers(show):
+    ''' Loads group data. '''
     data = loadGroups()
     for user in data["users"]:
+        ''' Builds service to access the Directory API. '''
         service = google_api.buildService(None, "directory")
+        ''' Queries the Directory API and gets a list of the groups the user is in. '''
         results = service.groups().list(
             userKey=user, domain=data["domain"][0]).execute()
         response = json.dumps(results, indent=4, separators=(",", ";"))
+        ''' Prints response. '''
         print(response)
