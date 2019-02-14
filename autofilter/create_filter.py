@@ -2,8 +2,10 @@
 import googleapiclient
 from googleapiclient.discovery import build
 from httplib2 import Http
+import autofilter.google_api as google_api
 
-def batch_add(google_api, config):
+
+def batch_add(config):
     ''' This function creates a filter based on what's in the config file and adds it to all specified users' accounts. '''
     for user in config["users"]:
         ''' Builds a service to access the Gmail API. '''
@@ -23,15 +25,24 @@ def batch_add(google_api, config):
 ''' Public Access Point for creation of filters. '''
 
 
-def add(google_api, user, filter_body):
-    service = google_api.buildService(google_api, user)
-    __add(service, filter_body)
+def add(user, filter_object):
+    service = google_api.buildService(user, "gmail")
+    __add(service, filter_object)
 
 
 ''' Add a single filter to a user's account. '''
 
 
-def __add(service, filter_body):
+def __add(service, filter_object):
     service.users().settings().filters().\
-        create(userId="me", body=filter_body).execute()
+        create(userId="me", body=filter_object).execute()
 
+def create_filter_object(crit, labels, labelName):
+    for label in labels:
+        if label["name"] == labelName:
+            labelID = label["id"]
+            break
+    action = {"addLabelIds": [labelID]}
+    body = {"criteria": crit,
+                    "action": action}
+    return body

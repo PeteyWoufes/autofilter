@@ -7,7 +7,7 @@ def batch_add(google_api, data):
     ''' Data must be passed in in the format laid out in the config template. '''
     for user in data["users"]:
         ''' Builds the service needed to access the Gmail API. '''
-        service = google_api.buildService(user)
+        service = google_api.buildService(user, "gmail")
         for label in data["labels"]:
             label_str = str(label)
             label_object = __create_label_object(label_str)
@@ -17,7 +17,7 @@ def batch_add(google_api, data):
 ''' Public Access Point for creation of single label. '''
 def add(user, label_str):
     label_object = __create_label_object(label_str)
-    service = google_api.buildService(user)
+    service = google_api.buildService(user, "gmail")
     label = __add(service, user, label_object)
     return label
 

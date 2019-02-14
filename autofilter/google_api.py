@@ -23,10 +23,21 @@ def getCreds():
         serviceaccountemail, serviceaccountpkcs12filepath, password, scopes=scopes)
     return credentials
 
-def buildService(user):
-    ''' Gets service account credentials, impersonates the user in question, and then builds a service to access their Gmail using the API. '''
-    credentials = getCreds()
-    delegated_creds = credentials.create_delegated(user)
-    service = build(
-        'gmail', 'v1', http=delegated_creds.authorize(Http()))
-    return service
+def buildService(user, API):
+    if API == "gmail":
+        ''' Gets service account credentials, impersonates the user in question, and then builds a service to access their Gmail using the API. '''
+        credentials = getCreds()
+        delegated_creds = credentials.create_delegated(user)
+        service = build(
+            'gmail', 'v1', http=delegated_creds.authorize(Http()))
+        return service
+
+    if API == "directory":
+        credentials = getCreds()
+        with open("auth.json", 'r') as a:
+            data = json.loads(a.read())
+        poweruser = data["poweruser"][0]
+        delegated_creds = credentials.create_delegated(poweruser)
+        service = build(serviceName="admin", version="directory_v1",
+                    http=delegated_creds.authorize(Http()))
+        return service

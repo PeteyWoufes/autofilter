@@ -1,6 +1,6 @@
 
 import autofilter.google_api as google
-import autofilter.create_label as labels
+import autofilter.create_label as af_labels
 import autofilter.create_filter as filters
 import autofilter.group_manager as groups
 import autofilter.fetch_label_ids as fetch_labels
@@ -12,8 +12,10 @@ def main():
     data = loadData()
     try:
         for user in data["users"]:
+            af_labels.add(user, "Pipeline")
             labels = fetch_labels.fetch_labels(google, user)
-            filters.replace_names(labels, "test1")
+            obj = filters.create_filter_object({"from": "pipeLine@giant.ie"}, labels, "Pipeline")
+            filters.add(user, obj)
         print("All done.")
     except KeyError:
         print(KeyError)
