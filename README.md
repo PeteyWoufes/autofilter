@@ -15,5 +15,14 @@ To work with the source code provided you will also need to install some modules
 pip install -r requirements.txt
 ```
 
+## Usage
+The Autofilter library contains (as of 14th of February 2018):
+* create_filter, a script for creating and adding filters and filter objects.
+* create_label, a script for creating labels, one at a time or in bulk.
+* fetch_label_ids, a script which only contains one method; this script checks what labels exist on a user's Gmail account and provide you with names and IDs for them.
+* google_api, a script which generates Service Account Credentials to use for impersonating Gmail users, and creates services to access the Gmail and Directory APIs.
+* group_manager, a script for creating and listing groups and users.
+Of those scripts, you should use all but google_api, because google_api is only used internally by the other scripts. 
+
 ## License
 This program is licenced under the MIT License. In short, all I require is that you preserve the copyright and license notices in this code. You can do whatever you want with it and you are not obligated to publish your improvements upstream, however, it would be greatly appreciated!

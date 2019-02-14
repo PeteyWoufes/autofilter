@@ -8,6 +8,4 @@ def fetch_labels(google_api, user):
     labels = response['labels']
     for label in labels:
         print ('Label id: %s - Label name: %s' % (label['id'], label['name']))
-    
-    json.dump(labels, open("ids.json", "w"))
     return (labels)
