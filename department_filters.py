@@ -3,23 +3,25 @@ import autofilter.google_api as google
 import autofilter.create_label as labels
 import autofilter.create_filter as filters
 import autofilter.group_manager as groups
-
+import json
 import argparse
 
 
 def main():
-    # args = getArgs()
+    data = loadData()
     try:
         
-        # labels.addLabels(google, None)
-        filters.create_filter(google, "RnB")
-        
+        labels.batch_add(google, data)
+        # filters.batch_add(google, data)
         # groups.addUser(google, args.show)
         print("All done.")
     except KeyError:
-        print("Correct usage: department_filters.py -s --show.")
+        print(KeyError)
 
-
+def loadData():
+    with open("config.json", "r") as x:
+        data = json.loads(x.read())
+    return data
 
 '''
 def getArgs():
