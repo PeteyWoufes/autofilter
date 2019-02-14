@@ -22,6 +22,7 @@ The Autofilter library contains (as of 14th of February 2018):
 * fetch_label_ids, a script which only contains one method; this script checks what labels exist on a user's Gmail account and provide you with names and IDs for them.
 * google_api, a script which generates Service Account Credentials to use for impersonating Gmail users, and creates services to access the Gmail and Directory APIs.
 * group_manager, a script for creating and listing groups and users.
+
 Of those scripts, you should use all but google_api, because google_api is only used internally by the other scripts. 
 
 ## License
